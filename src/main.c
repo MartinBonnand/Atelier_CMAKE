@@ -34,4 +34,8 @@ int main(int argc, char *argv[]){
 int car(int a) {
     return a * a;
 }
+else if (strcmp(op, "car") == 0) {
+    printf("%f\n", _car(a));
+}
+
 
