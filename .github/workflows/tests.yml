@@ -5,9 +5,11 @@ jobs:
   Compilation:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3   # Git clone automatiquement
       - name: Compilation
         run: |
+          last_directory=$(basename ${{ runner.workspace }})
+          git clone https://github.com/${{ github.repository }}.git
+          cd ./$last_directory
           mkdir build
           cd build
           cmake ..
@@ -19,7 +21,6 @@ jobs:
     steps:
       - name: Test add
         run: |
-          cd build
           ./src/calculator add 10 5
 
   Test_Sub:
@@ -28,7 +29,6 @@ jobs:
     steps:
       - name: Test sub
         run: |
-          cd build
           ./src/calculator sub 3 -2
 
   Test_Mul:
@@ -37,7 +37,6 @@ jobs:
     steps:
       - name: Test mul
         run: |
-          cd build
           ./src/calculator mul 5 5
 
   Test_Div:
@@ -46,7 +45,6 @@ jobs:
     steps:
       - name: Test div
         run: |
-          cd build
           ./src/calculator div 1 5
 
   Test_Car:
@@ -55,7 +53,6 @@ jobs:
     steps:
       - name: Test car
         run: |
-          cd build
           ./src/calculator car 5
 
   Deploy:
